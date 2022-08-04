@@ -1,0 +1,287 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: local-storage
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+---
+# Turbonomic XL PVs
+#consul
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv001
+spec:
+  capacity:
+    storage: 1Gi
+  claimRef:
+    kind: PersistentVolumeClaim
+    name: consul-data
+    namespace: turbonomic
+  accessModes:
+  - ReadWriteOnce 
+  volumeMode: Filesystem
+  local: 
+    path: /your-path/replica-1
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - example-node
+---
+#api
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv002
+spec:
+  capacity:
+    storage: 1Gi
+  claimRef:
+    kind: PersistentVolumeClaim
+    name: api
+    namespace: turbonomic
+  accessModes:
+  - ReadWriteOnce 
+  volumeMode: Filesystem
+  local: 
+    path: /your-path/replica-1
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - example-node
+---
+#api-certs
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv003
+spec:
+  capacity:
+    storage: 1Gi
+  claimRef:
+    kind: PersistentVolumeClaim
+    name: api-certs
+    namespace: turbonomic
+  accessModes:
+  - ReadWriteOnce 
+  volumeMode: Filesystem
+  local: 
+    path: /your-path/replica-1
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - example-node
+---
+#auth
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv004
+spec:
+  capacity:
+    storage: 1Gi
+  claimRef:
+    kind: PersistentVolumeClaim
+    name: auth
+    namespace: turbonomic
+  accessModes:
+  - ReadWriteOnce 
+  volumeMode: Filesystem
+  local: 
+    path: /your-path/replica-1
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - example-node
+---
+#topology-processor
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv005
+spec:
+  capacity:
+    storage: 3Gi
+  claimRef:
+    kind: PersistentVolumeClaim
+    name: topology-processor
+    namespace: turbonomic
+  accessModes:
+  - ReadWriteOnce 
+  volumeMode: Filesystem
+  local: 
+    path: /your-path/replica-1
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - example-node
+---
+#zookeeper
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv006
+spec:
+  capacity:
+    storage: 3Gi
+  claimRef:
+    kind: PersistentVolumeClaim
+    name: zookeeper-data
+    namespace: turbonomic
+  accessModes:
+  - ReadWriteOnce 
+  volumeMode: Filesystem
+  local: 
+    path: /your-path/replica-1
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - example-node
+---
+#rsyslog-auditsize
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv007
+spec:
+  capacity:
+    storage: 30Gi
+  claimRef:
+    kind: PersistentVolumeClaim
+    name: rsyslog-auditlogdata
+    namespace: turbonomic
+  accessModes:
+  - ReadWriteOnce 
+  volumeMode: Filesystem
+  local: 
+    path: /your-path/replica-1
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - example-node
+---
+#rsyslog-logsize
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv008
+spec:
+  capacity:
+    storage: 30Gi
+  claimRef:
+    kind: PersistentVolumeClaim
+    name: rsyslog-syslogdata
+    namespace: turbonomic
+  accessModes:
+  - ReadWriteOnce 
+  volumeMode: Filesystem
+  local: 
+    path: /your-path/replica-1
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - example-node
+---
+#kafka
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv009
+spec:
+  capacity:
+    storage: 50Gi
+  claimRef:
+    kind: PersistentVolumeClaim
+    name: kafka-log
+    namespace: turbonomic
+  accessModes:
+  - ReadWriteOnce 
+  volumeMode: Filesystem
+  local: 
+    path: /your-path/replica-1
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - example-node
+---
+#db
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv010
+spec:
+  capacity:
+    storage: 500Gi
+  claimRef:
+    kind: PersistentVolumeClaim
+    name: db-data
+    namespace: turbonomic
+  accessModes:
+  - ReadWriteOnce 
+  volumeMode: Filesystem
+  local: 
+    path: /your-path/replica-1
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - example-node
